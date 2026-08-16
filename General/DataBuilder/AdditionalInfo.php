@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Magelearn\CreditMemoExport\General\DataBuilder;
 
-use Magento\Sales\Api\Data\CreditmemoInterface;
 use Magento\Sales\Model\Order\Creditmemo;
 use Magelearn\CreditMemoExport\Api\GeneralDataBuilderInterface;
 

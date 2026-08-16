@@ -9,7 +9,7 @@
             <class>separator-top</class>
             <label>Magelearn Export</label>
             <tab>integrations</tab>
-            <resource>Magelearn_CreditMemoExport::integration</resource>
+            <resource>Magelearn_CreditMemoExport::export_creditmemo</resource>
             <group id="creditmemo" translate="label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Credit Memo</label>
                 <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">

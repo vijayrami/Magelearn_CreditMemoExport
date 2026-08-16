@@ -15,6 +15,7 @@ use Magento\Sales\Api\CreditmemoRepositoryInterface;
 use Magento\Sales\Model\Order\Creditmemo\CommentRepository;
 use Psr\Log\LoggerInterface;
 use Magelearn\CreditMemoExport\General\ExportConfiguration;
+use Magelearn\CreditMemoExport\Model\CreditmemoExportRepository;
 
 use function __;
 
@@ -35,6 +36,7 @@ class Export extends Action
         private readonly CommentRepository $commentRepository,
         private readonly ExportConfiguration $config,
         private readonly LoggerInterface $logger,
+        private readonly CreditmemoExportRepository $creditmemoExportRepository,
         Context $context
     ) {
         parent::__construct($context);
@@ -86,9 +88,18 @@ class Export extends Action
             );
         }
 
+        $exportData = $this->creditmemoExportRepository->findByCreditmemoEntityId($creditmemoId);
         $username = $this->getAdminUserName();
 
+        if ($exportData->getPublishedAt() || $exportData->getExportedAt()) {
+            throw new LocalizedException(
+                __('Credit Memo has already been queued or exported to Service.')
+            );
+        }
+
         $this->publisher->publish($this->config->getTopicName(), (string) $creditmemoId);
+        $exportData->publish();
+        $this->creditmemoExportRepository->save($exportData);
 
         $comment = $creditmemo->addComment(
             __(

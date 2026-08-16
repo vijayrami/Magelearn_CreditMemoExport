@@ -15,6 +15,7 @@
             <argument name="consumer" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\Consumer\Proxy</argument>
             <argument name="creditmemoRepository" xsi:type="object">Magento\Sales\Api\CreditmemoRepositoryInterface\Proxy</argument>
             <argument name="searchCriteriaBuilder" xsi:type="object">Magelearn\CreditMemoExport\Console\Command\SearchCriteriaBuilder\Proxy</argument>
+            <argument name="creditmemoExportRepository" xsi:type="object">Magelearn\CreditMemoExport\Model\CreditmemoExportRepository\Proxy</argument>
         </arguments>
     </type>
 
