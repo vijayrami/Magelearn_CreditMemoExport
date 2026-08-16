@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Communication/etc/communication.xsd">
+    <topic name="magelearn.creditmemo_export" request="string">
+        <handler name="magelearn.creditmemo_export"
+                 type="Magelearn\CreditMemoExport\Creditmemo\Consumer"
+                 method="process" />
+    </topic>
+</config>

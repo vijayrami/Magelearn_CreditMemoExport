@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="magelearn_export_creditmemo" xsi:type="object">Magelearn\CreditMemoExport\Console\Command\ExportCreditmemo</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magelearn\CreditMemoExport\Console\Command\ExportCreditmemo">
+        <arguments>
+            <argument name="consumer" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\Consumer\Proxy</argument>
+            <argument name="creditmemoRepository" xsi:type="object">Magento\Sales\Api\CreditmemoRepositoryInterface\Proxy</argument>
+            <argument name="searchCriteriaBuilder" xsi:type="object">Magelearn\CreditMemoExport\Console\Command\SearchCriteriaBuilder\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magelearn\CreditMemoExport\Controller\Adminhtml\Creditmemo\Export">
+        <arguments>
+            <argument name="config" xsi:type="object">
+                Magelearn\CreditMemoExport\Creditmemo\ExportConfiguration
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magelearn\CreditMemoExport\Creditmemo\Consumer">
+        <arguments>
+            <argument name="exporter" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\Exporter</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magelearn\CreditMemoExport\Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="name" xsi:type="string">MagelearnExport</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="system" xsi:type="object">Magelearn\CreditMemoExport\Logger\FileHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Logger\FileHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/message-queue.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Xml\CreditmemoWriter" type="Magelearn\CreditMemoExport\Xml\Writer">
+        <arguments>
+            <argument name="rootName" xsi:type="string">returnRequest</argument>
+            <argument name="arrayItemMap" xsi:type="array">
+                <item name="vatDetail" xsi:type="string">vat</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Creditmemo\Exporter\File"
+                 type="Magelearn\CreditMemoExport\General\Exporter\File">
+        <arguments>
+            <argument name="exportConfiguration" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\ExportConfiguration</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Creditmemo\Exporter\Resolver"
+                 type="Magelearn\CreditMemoExport\General\Exporter\Resolver">
+        <arguments>
+            <argument name="fileExporter" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\Exporter\File</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Creditmemo\Exporter"
+                 type="Magelearn\CreditMemoExport\General\Exporter">
+        <arguments>
+            <argument name="dataBuilder" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\DataBuilder</argument>
+            <argument name="exporterResolver" xsi:type="object">Magelearn\CreditMemoExport\Creditmemo\Exporter\Resolver</argument>
+            <argument name="xmlWriter" xsi:type="object">Magelearn\CreditMemoExport\Xml\CreditmemoWriter</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Creditmemo\DataBuilder"
+                 type="Magelearn\CreditMemoExport\General\DataBuilder">
+        <arguments>
+            <argument name="dataBuilders" xsi:type="array">
+                <item name="client" xsi:type="object" sortOrder="10">Magelearn\CreditMemoExport\General\DataBuilder\Client</item>
+                <item name="additionalInfo" xsi:type="object" sortOrder="20">Magelearn\CreditMemoExport\General\DataBuilder\AdditionalInfo</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magelearn\CreditMemoExport\Creditmemo\ExportConfiguration"
+                 type="Magelearn\CreditMemoExport\General\ExportConfiguration">
+        <arguments>
+            <argument name="entityName" xsi:type="string">creditmemo</argument>
+            <argument name="topicName" xsi:type="string">magelearn.creditmemo_export</argument>
+        </arguments>
+    </virtualType>
+</config>

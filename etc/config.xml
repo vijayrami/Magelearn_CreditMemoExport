@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <magelearn_export>
+            <creditmemo>
+                <enabled>1</enabled>
+                <export_path>var/integration/export/creditmemo</export_path>
+                <backup_path>var/export_creditmemo</backup_path>
+            </creditmemo>
+        </magelearn_export>
+    </default>
+</config>

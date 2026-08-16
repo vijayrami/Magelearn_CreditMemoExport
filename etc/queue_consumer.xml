@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <consumer name="magelearn.creditmemo_export" queue="magelearn.creditmemo_export"
+              connection="db"
+              maxMessages="50"
+              consumerInstance="Magento\Framework\MessageQueue\Consumer"
+              handler="Magelearn\CreditMemoExport\Creditmemo\Consumer::process" />
+</config>
