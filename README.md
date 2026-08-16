@@ -1,8 +1,6 @@
-# Magelearn_CreditMemoExport
-Magento 2 Credit Memo Export module with Admin export button, message queue processing, XML generation, configurable export paths, and CLI support.
 # Magelearn Credit Memo Export
 
-A Magento 2 learning module that demonstrates how to export Credit Memos asynchronously using **Admin UI, Message Queue, Consumer, XML generation, file export, and export-status tracking**.
+A Magento2 module that demonstrates how to export Credit Memos asynchronously using **Admin UI, Message Queue, Consumer, XML generation, file export, and export-status tracking**.
 
 ## Functionality
 
