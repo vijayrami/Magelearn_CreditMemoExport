@@ -6,6 +6,10 @@ A Magento2 module that demonstrates how to export Credit Memos asynchronously us
 
 The module provides an **Export to Service** button on the Magento Admin Credit Memo view page.
 
+## Screenshots
+
+![Export credit memo](/assets/credit_memo_1.png "Export credit memo")
+
 ### Admin
 
 Navigate to:
