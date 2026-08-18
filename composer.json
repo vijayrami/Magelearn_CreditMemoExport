@@ -1,0 +1,22 @@
+{
+    "name": "magelearn/module-credit-memo-export",
+    "description": "Magento 2 module for exporting Credit Memos asynchronously via Message Queue.",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "name": "Vijay Rami",
+            "email": "vijaymrami@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Magelearn\\CreditMemoExport\\": ""
+        }
+    }
+}
